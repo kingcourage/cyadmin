@@ -1,0 +1,5 @@
+# MyBatis
+#mybatis:
+#    typeAliasesPackage: com.wcy.model.entity
+#    mapperLocations: classpath:/mapper/*.xml
+#    configLocation: classpath:/mybatis-config.xml
