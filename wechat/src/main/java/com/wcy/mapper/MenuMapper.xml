@@ -14,10 +14,24 @@
     <result column="createid" jdbcType="BIGINT" property="createid" />
     <result column="updateid" jdbcType="BIGINT" property="updateid" />
   </resultMap>
+  <resultMap id="BaseModelResultMap" type="com.wcy.model.entity.MenuModel" >
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parentid" jdbcType="BIGINT" property="parentid" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="href" jdbcType="VARCHAR" property="href" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="createid" jdbcType="BIGINT" property="createid" />
+    <result column="updateid" jdbcType="BIGINT" property="updateid" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, parentid, text, color, icon, href, status, createtime, updatetime, createid, 
     updateid
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -161,4 +175,12 @@
       updateid = #{updateid,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="menuList" resultMap="BaseModelResultMap" parameterType="com.wcy.model.entity.MenuModel">
+    select  <include refid="Base_Column_List" /> from menu
+    <where>
+      <if test="parentid != null">
+        parentid = #{parentid,jdbcType=BIGINT}
+      </if>
+    </where>
+  </select>
 </mapper>

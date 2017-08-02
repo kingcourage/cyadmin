@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
  * Created by wcy on 2017/7/2.
  */
 
-@Service
 public class MenuService {
     @Autowired
     TokenUtil tokenUtil;

@@ -25,9 +25,6 @@ import java.io.IOException;
 public class CoreController {
 
     @Autowired
-    MenuService menuService;
-
-    @Autowired
     private StringRedisTemplate template;
 
     //增加日志

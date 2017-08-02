@@ -52,7 +52,7 @@ public class LoginController extends BaseController{
                 cookie.setPath("/");
                 response.addCookie(cookie);
                 model.addAttribute("msg","hello");
-                return  "index";
+                return  "redirect:index";
             }
         } catch (Exception e) {
             pageResponse.setCode(Dict.ReturnCode.FAIL);

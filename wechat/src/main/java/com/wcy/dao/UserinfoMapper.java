@@ -3,7 +3,7 @@ package com.wcy.dao;
 import com.wcy.model.entity.Userinfo;
 import org.springframework.stereotype.Repository;
 
-@Repository
+
 public interface UserinfoMapper {
     int deleteByPrimaryKey(Long id);
 

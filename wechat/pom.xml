@@ -181,6 +181,18 @@
 						src/main/resources/mybatis-generator.xml</configurationFile>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+					<compilerArguments>
+						<extdirs>${project.basedir}/lib</extdirs>
+					</compilerArguments>
+				</configuration>
+			</plugin>
 		</plugins>
 		<!-- 允许将xml文件放在非resources位置也能打包 -->
 		<resources>

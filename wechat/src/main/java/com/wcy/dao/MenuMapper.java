@@ -1,6 +1,9 @@
 package com.wcy.dao;
 
 import com.wcy.model.entity.Menu;
+import com.wcy.model.entity.MenuModel;
+
+import java.util.List;
 
 public interface MenuMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +17,6 @@ public interface MenuMapper {
     int updateByPrimaryKeySelective(Menu record);
 
     int updateByPrimaryKey(Menu record);
+
+    List<MenuModel>  menuList(MenuModel menu);
 }

@@ -44,56 +44,33 @@
                         <div class="logo-element">hAdmin
                         </div>
                     </li>
-                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">分类</span>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="${base}/index/page">
-                            <i class="fa fa-home"></i>
-                            <span class="nav-label">主页</span>
-                        </a>
-                    </li>
+                        <li class="line dk"></li>
+                        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                            <span class="ng-scope">分类</span>
+                        </li>
+                        <li>
+                            <a href="" style="color:#b400b8"><i class="J_menuItem glyphicon glyphicon-home"></i> <span class="nav-label">主页</span></a>
+                        </li>
 
-                    <li class="line dk"></li>
-                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">分类</span>
-                    </li>
-                    <li>
-                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">信箱 </span><span class="label label-warning pull-right">16</span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="#">收件箱</a>
-                            </li>
-                            <li><a class="J_menuItem" href="#">查看邮件</a>
-                            </li>
-                            <li><a class="J_menuItem" href="#">写信</a>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <li class="line dk"></li>
-                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">分类</span>
-                    </li>
-                    <li>
-                        <a href=""><i class="glyphicon glyphicon-th-list"></i><span class="nav-label">菜单</span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem glyphicon glyphicon-forward" href="${base}/menu">菜单管理</a></li>
-                        </ul>
-                    </li>
-
-
-                    <li class="line dk"></li>
-                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">分类</span>
-                    </li>
-                    <li>
-                        <a href=""><i class="glyphicon glyphicon-th-list"></i><span class="nav-label">数据源</span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem glyphicon glyphicon-forward" href="${base}/druid/index">durid监控</a></li>
-                        </ul>
-                    </li>
-
+                    <#if menuList?exists>
+                        <#list menuList as menu>
+                         <li class="line dk"></li>
+                         <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                             <span class="ng-scope">分类</span>
+                         </li>
+                         <li>
+                             <a href="" style="color:${menu.color}"><i class="${menu.icon}"></i> <span class="nav-label">${menu.text} </span></a>
+                             <ul class="nav nav-second-level">
+                                 <#if menu.nodes?exists>
+                                     <#list menu.nodes as node>
+                                         <li><a style="color:${node.color}" class="J_menuItem ${node.icon}" href=${base}${node.href}>${node.text}</a>
+                                         </li>
+                                     </#list>
+                                 </#if>
+                             </ul>
+                         </li>
+                     </#list>
+                    </#if>
                 </ul>
             </div>
         </nav>
