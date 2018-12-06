@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1.:3306/cyadmin?useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto:
+
+  redis:
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 5
+        max-wait: 3
+        min-idle: 2
+    password: 19941014
+    host: 39.107.249.246
