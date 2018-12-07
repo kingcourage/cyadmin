@@ -10,7 +10,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto:
+      ddl-auto: create
 
   redis:
     jedis:
@@ -21,3 +21,15 @@ spring:
         min-idle: 2
     password: 19941014
     host: 39.107.249.246
+  data:
+    mongodb:
+      host: 39.107.249.246
+      port: 27017
+      username: admin
+      password: 123456
+      database: admin
+
+logging:
+  level:
+      org.springframework : debug
+      com.wcy : debug
