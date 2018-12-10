@@ -10,7 +10,19 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+
+  # thymeleaf
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    mode: HTML5
+    cache: false
+
 
   redis:
     jedis:
@@ -31,5 +43,6 @@ spring:
 
 logging:
   level:
-      org.springframework : debug
+      org.springframework : info
       com.wcy : debug
+

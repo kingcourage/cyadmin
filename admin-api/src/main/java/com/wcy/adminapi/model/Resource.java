@@ -2,10 +2,7 @@ package com.wcy.adminapi.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -13,6 +10,7 @@ import java.util.Date;
 @Data
 public class Resource {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 100)
@@ -21,7 +19,11 @@ public class Resource {
     @Column(length = 2000)
     private String memory;
 
+    @Column
     private Integer type;
+
+    @Column
+    private String url;
 
     @Column
     private Date createTime;
