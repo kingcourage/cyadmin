@@ -7,7 +7,7 @@
 <div class="wrapper">
   <header th:replace="common/main_head :: mainHeadFragment"></header>
   <!-- Left side column. contains the logo and sidebar -->
-  <aside th:replace="common/main_sidebar :: mainSidebarFragment"></aside>
+  <aside th:replace="common/main_sidebar :: mainSidebarFragment(${session.menus})"></aside>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

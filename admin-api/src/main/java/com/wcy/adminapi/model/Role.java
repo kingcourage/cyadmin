@@ -3,12 +3,13 @@ package com.wcy.adminapi.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "SYS_ROLE")
 @Data
-public class Role {
+public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +20,7 @@ public class Role {
     @Column(length = 2000)
     private String memory;
 
-
+    @Column
     private Integer type;
 
     @Column

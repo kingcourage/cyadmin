@@ -26,4 +26,9 @@ public class RoleServiceImpl implements RoleService {
         List<Role> roles =  roleDao.getRolesByIdIn(user2Roles.stream().map(item->item.getRoleId()).collect(Collectors.toList()));
         return roles;
     }
+
+    @Override
+    public List<Role> getRolesByIdIn(List<Long> ids) {
+        return roleDao.getRolesByIdIn(ids);
+    }
 }

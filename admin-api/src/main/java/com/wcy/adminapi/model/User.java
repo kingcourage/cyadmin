@@ -3,12 +3,13 @@ package com.wcy.adminapi.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "SYS_USER")
 @Data
-public class User {
+public class User implements Serializable {
     @Id()
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;

@@ -19,6 +19,9 @@ public class ServerResponse<T> {
     public static ServerResponse createBySuccess(){
         return new ServerResponse(0,"success",null);
     }
+    public static ServerResponse createBySuccessWithData(Object data){
+        return new ServerResponse(0,"success",data);
+    }
 
     public static  ServerResponse createByErrorMessage(String message){
         return new ServerResponse(1,message,null);

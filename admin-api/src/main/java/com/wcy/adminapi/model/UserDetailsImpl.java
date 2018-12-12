@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class UserDetailsImpl implements UserDetails {
-
+    private Long id;
     private String username;
     private String password;
 
@@ -28,11 +28,13 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl(User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
+        this.id = user.getId();
     }
 
     public UserDetailsImpl(User user,List<Role> roles) {
         this.username = user.getUsername();
         this.password = user.getPassword();
+        this.id = user.getId();
         this.roles = roles;
     }
 

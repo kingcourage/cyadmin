@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface Role2ResourceDao extends JpaRepository<Role2Resource,Long> {
     List<Role2Resource> getRole2ResourceByResourceIdEquals(Long id);
+
+    List<Role2Resource> getRole2ResourceByRoleIdIn(List<Long> ids);
 }

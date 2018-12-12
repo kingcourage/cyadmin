@@ -7,7 +7,7 @@
 <div class="wrapper">
   <header th:replace="common/main_head :: mainHeadFragment"></header>
   <!-- Left side column. contains the logo and sidebar -->
-  <aside th:replace="common/main_sidebar :: mainSidebarFragment"></aside>
+  <aside th:replace="common/main_sidebar :: mainSidebarFragment(${session.menus})"></aside>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -24,8 +24,8 @@
 
     <!-- Main content -->
     <section class="content">
-      resource
-
+      <ul class="ztree" id="myTree"/>
+      11
     </section>
     <!-- /.content -->
   </div>
@@ -41,5 +41,26 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+<script>
+  var setting = {
+    async: {
+      enable: true,
+      url:"/resource/tree_data",
+      autoParam:["id=parentId"],
+      otherParam:{"otherParam":"zTreeAsyncTest"},
+      dataFilter: filter
+    }
+  };
+  function filter(treeId, parentNode, childNodes) {
+    if (!childNodes) return null;
+    for (var i=0, l=childNodes.length; i<l; i++) {
+      childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+    }
+    return childNodes;
+  }
+  $(document).ready(function(){
+    $.fn.zTree.init($("#myTree"), setting);
+  });
+</script>
 </body>
 </html>
