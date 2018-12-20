@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class IndexController {
     @GetMapping("/admin/index")
     public String index(HttpSession session){
        UserDetailsImpl userDetails =  SecurityUtil.getCurrentUser();
-       List<Resource> menus =  resourceService.getResourceByUsernameAndType(userDetails.getId(),Dict.ResourceTyep.MENU.getCode());
+       List<Resource> menus =  resourceService.getResourceByUserIdAndType(userDetails.getId(),Dict.ResourceTyep.MENU.getCode());
        List<MenuVO> menuVOList = menus.stream().filter(item->item.getParentId() == 0).map(item->{
            MenuVO menuVO = new MenuVO();
            BeanUtils.copyProperties(item,menuVO);
@@ -34,7 +35,7 @@ public class IndexController {
        }).collect(Collectors.toList());
        menuVOList.stream().forEach(item->{
            for(Resource menu : menus){
-               if(menu.getParentId() == item.getId()){
+               if(menu.getParentId().equals(item.getId())){
                    MenuVO menuVO = new MenuVO();
                    BeanUtils.copyProperties(menu,menuVO);
                    if(item.getChildren() == null){

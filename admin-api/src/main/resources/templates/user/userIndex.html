@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/header::headerFragment(用户管理)">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <button class="btn btn-default" onclick="reload()">重置</button>
+                <button class="btn btn-info" onclick="add()">添加</button>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="myTable" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" name="keeperUserGroup-checkable" class="group-checkable"/>
+                                <span></span>
+                            </label>
+                        </th>
+                        <th>序号</th>
+                        <th>用户名</th>
+                        <th>邮箱</th>
+                        <th>手机号</th>
+                        <th>昵称</th>
+                        <th>备注</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    $(function () {
+          $('#myTable').DataTable({
+            ajax:{
+                url:'/user/page_data',
+                dataSrc:''
+            },
+            lengthMenu: [ //自定义分页长度
+                [10, 20, 50],
+                ['10 页', '20 页', '50页']
+            ],
+            columns: [
+                {
+                    className: "td-checkbox",
+                    orderable: false,
+                    bSortable: false,
+                    data: "id",
+                    width: '30px',
+                    render: function (data, type, row, meta) {
+                        var content = '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">';
+                        content += '	<input type="checkbox" class="group-checkable" value="' + data + '" />';
+                        content += '	<span></span>';
+                        content += '</label>';
+                        return content;
+                    }
+                },
+                {
+                    data: null,
+                    bSortable: false,
+                    className: "text-right",
+                    width: "50px",
+                    render: function (data, type, row, meta) {
+                        // 显示行号
+                        var startIndex = meta.settings._iDisplayStart;
+                        return startIndex + meta.row + 1;
+                    }
+                },
+                {data: 'username'},
+                {data: 'email'},
+                {data: 'mobile'},
+                {data: 'nickName'},
+                {data: 'memory'},
+                {data: 'createTime',
+                    render(data,type,row,meta){
+                        return formatDateTime(data);
+                    }
+                },
+                {
+                    data: "null",
+                    bSortable: false,
+                    render: function (data, type, row,meta) {
+                        var html = '<button class="btn btn-xs jfedit btn-danger"  id="saveBtn"  onclick="edit('+row.id+')" value="' + row.id + '">编辑</button>&nbsp;&nbsp;&nbsp;&nbsp;'
+                            + '<button class="btn btn-xs btn-danger jfdelete" onclick=del('+row.id+') value="' + row.id + '">删除</button>&nbsp;&nbsp;&nbsp;&nbsp;'
+                            + '<button class="btn btn-xs btn-danger jfdelete" onclick=viewChipRecord('+row.id+') value="' + row.id + '">查看下注记录</button>';
+                        return html;
+                    }
+                }
+            ],
+
+        });
+    })
+
+
+
+</script>
+</body>
+</html>

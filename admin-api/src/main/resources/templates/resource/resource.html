@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/header::headerFragment(资源管理)">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div>
+    <section class="content">
+        <!-- Main content -->
+        <ul class="ztree" id="myTree"/>
+    </section>
+</div>
+
+</body>
+<script>
+    var setting = {
+        async: {
+            enable: true,
+            url: "/resource/tree_data",
+            autoParam: ["id=parentId"],
+            otherParam: {"otherParam": "zTreeAsyncTest"},
+            dataFilter: filter,
+        },
+        callback: {
+            beforeClick: beforeClick,
+            onClick: onClick
+        }
+
+    };
+
+    function filter(treeId, parentNode, childNodes) {
+        if (!childNodes) return null;
+        for (var i = 0, l = childNodes.length; i < l; i++) {
+            childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+        }
+        return childNodes;
+    }
+
+    function beforeClick(treeId, treeNode, clickFlag) {
+        console.info("before click");
+        return true;
+    }
+    function onClick(event, treeId, treeNode, clickFlag) {
+        alert(treeNode.tId + ", " + treeNode.name);    }
+
+    $(document).ready(function () {
+        $.fn.zTree.init($("#myTree"), setting);
+    });
+</script>
+</body>
+</html>

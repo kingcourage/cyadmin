@@ -18,7 +18,7 @@ public class AdminApiApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Customer customer = repository.save(new Customer("Alice", "Smith"));
-        System.out.println(customer);
+        //Customer customer = repository.save(new Customer("Alice", "Smith"));
+        //System.out.println(customer);
     }
 }

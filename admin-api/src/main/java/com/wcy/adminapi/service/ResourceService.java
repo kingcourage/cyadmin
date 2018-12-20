@@ -26,7 +26,7 @@ public interface ResourceService {
      * @param type
      * @return
      */
-    List<Resource> getResourceByUsernameAndType(Long userId,Integer type);
+    List<Resource> getResourceByUserIdAndType(Long userId, Integer type);
 
     /**
      * 根据父级id获取资源

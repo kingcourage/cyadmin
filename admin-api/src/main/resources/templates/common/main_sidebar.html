@@ -37,7 +37,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <th:block th:each="child : ${menu.children}">
-                        <li><a th:href="${child.url}" th:text="${child.name}"><i class="fa fa-circle-o"></i></a></li>
+                        <li><a th:href="${child.url}" target="myIframe" th:text="${child.name}"><i class="fa fa-circle-o"></i></a></li>
                         </th:block>
                     </ul>
                 </li>

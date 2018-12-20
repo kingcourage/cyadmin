@@ -20,7 +20,7 @@
     <!-- Morris chart -->
     <link rel="stylesheet" th:href="@{/bower_components/morris.js/morris.css}">
     <!-- jvectormap -->
-    <link rel="stylesheet" th:href="@{/bower_components/jvectormap/jquery-jvectormap.css}">
+    <!--<link rel="stylesheet" th:href="@{/bower_components/jvectormap/jquery-jvectormap.css}">-->
     <!-- Date Picker -->
     <link rel="stylesheet" th:href="@{/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css}">
     <!-- Daterange picker -->
@@ -28,6 +28,7 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css}">
     <link rel="stylesheet" th:href="@{/plugins/iCheck/square/blue.css}">
+    <link rel="stylesheet" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -73,13 +74,33 @@
     <script th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
     <!-- AdminLTE App -->
     <script th:src="@{/dist/js/adminlte.min.js}"></script>
+    <!-- DataTables -->
+    <script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script th:src="@{/dist/js/pages/dashboard.js}"></script>
+<!--    <script th:src="@{/dist/js/pages/dashboard.js}"></script>-->
     <!-- AdminLTE for demo purposes -->
     <script th:src="@{/dist/js/demo.js}"></script>
     <script th:src="@{/plugins/iCheck/icheck.min.js}"></script>
     <script th:src="@{/js/common.js}"></script>
     <script th:src="@{/plugins/layer/layer.js}"></script>
     <script th:src="@{/plugins/zTree_v3/js/jquery.ztree.all.js}"></script>
-
+    <script>
+        function formatDateTime(timestamp) {
+            var date = new Date(timestamp);
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            m = m < 10 ? ('0' + m) : m;
+            var d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            var h = date.getHours();
+            h = h < 10 ? ('0' + h) : h;
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            minute = minute < 10 ? ('0' + minute) : minute;
+            second = second < 10 ? ('0' + second) : second;
+            return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+        };
+    </script>
 </head>

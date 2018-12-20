@@ -38,7 +38,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public List<Resource> getResourceByUsernameAndType(Long userId, Integer type) {
+    public List<Resource> getResourceByUserIdAndType(Long userId, Integer type) {
         List<Role> roleList = roleService.getRolesByUserId(userId);
         if(roleList.size() > 0){
             List<Role2Resource> role2Resources = role2ResourceDao.getRole2ResourceByRoleIdIn(roleList.stream().map(item->item.getId()).collect(Collectors.toList()));

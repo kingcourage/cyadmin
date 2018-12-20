@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8180
 
 spring:
   datasource:
@@ -38,6 +38,6 @@ spring:
       uri: mongodb://admin:123456@39.107.249.246:27017/admin
 logging:
   level:
-      org.springframework : info
+      org.springframework : debug
       com.wcy : debug
 

@@ -6,6 +6,8 @@ import com.wcy.adminapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -20,5 +22,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByUsername(String username) {
         return userDao.findByUsername(username);
+    }
+
+    @Override
+    public List<User> queryUserList() {
+        return userDao.findAll();
     }
 }

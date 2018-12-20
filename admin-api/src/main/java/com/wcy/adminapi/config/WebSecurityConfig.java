@@ -74,8 +74,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         return o;
                     }
                 })
+
 //                .antMatchers("/hello").hasAuthority("ADMIN")
                 .and()
+                .headers().frameOptions().disable().and()
                 .formLogin()
                 .loginPage("/admin/login")
                 .loginProcessingUrl("/admin/loginCheck")
