@@ -77,7 +77,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 //                .antMatchers("/hello").hasAuthority("ADMIN")
                 .and()
-                .headers().frameOptions().disable().and()
                 .formLogin()
                 .loginPage("/admin/login")
                 .loginProcessingUrl("/admin/loginCheck")
@@ -113,7 +112,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .exceptionHandling()
-                .accessDeniedHandler(myAccessDeniedHandler);
+                .accessDeniedHandler(myAccessDeniedHandler)
+                .and().headers().frameOptions().disable().and();
     }
 
 

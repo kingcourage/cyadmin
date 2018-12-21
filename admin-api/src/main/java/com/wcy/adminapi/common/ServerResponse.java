@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ServerResponse<T> {
-    private Integer code;
+    private Integer status;
     private String message;
     private T data;
 
-    private ServerResponse(Integer code, String message, T data) {
-        this.code = code;
+    private ServerResponse(Integer status, String message, T data) {
+        this.status = status;
         this.message = message;
         this.data = data;
     }

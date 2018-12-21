@@ -27,7 +27,14 @@ public class IndexController {
     @GetMapping("/admin/index")
     public String index(HttpSession session){
        UserDetailsImpl userDetails =  SecurityUtil.getCurrentUser();
-       List<Resource> menus =  resourceService.getResourceByUserIdAndType(userDetails.getId(),Dict.ResourceTyep.MENU.getCode());
+        List<Resource> menus;
+       if("admin".equals(userDetails.getUsername())){
+           //管理员直接所有菜单
+            menus =  resourceService.getResourceByType(Dict.ResourceTyep.MENU.getCode());
+        }else{
+            menus =  resourceService.getResourceByUserIdAndType(userDetails.getId(),Dict.ResourceTyep.MENU.getCode());
+
+        }
        List<MenuVO> menuVOList = menus.stream().filter(item->item.getParentId() == 0).map(item->{
            MenuVO menuVO = new MenuVO();
            BeanUtils.copyProperties(item,menuVO);
@@ -50,6 +57,6 @@ public class IndexController {
            }
        });
        session.setAttribute("menus",menuVOList);
-       return "admin/index";
+       return "index";
     }
 }

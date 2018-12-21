@@ -1,5 +1,6 @@
 package com.wcy.adminapi.controller;
 
+import com.wcy.adminapi.common.ServerResponse;
 import com.wcy.adminapi.model.WeChatUser;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -7,12 +8,14 @@ import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceHttpClientImpl;
+import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.result.WxMpUserList;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -88,7 +91,7 @@ public class WechatConroller {
 
     @RequestMapping("index")
     public String index(){
-        return "wechat/index";
+        return "wechat/wechatIndex";
     }
 
     @RequestMapping("page_data")
@@ -105,7 +108,7 @@ public class WechatConroller {
                     weChatUser.setOpenId(item);
                     try {
                         String nickName = wxMpService.getUserService().userInfo(item).getNickname();
-                        weChatUser.setName(nickName);
+                        weChatUser.setNickName(nickName);
                         weChatUserList.add(weChatUser);
                     } catch (WxErrorException e) {
                         e.printStackTrace();
@@ -116,5 +119,24 @@ public class WechatConroller {
             e.printStackTrace();
         }
         return weChatUserList;
+    }
+
+    @RequestMapping("send_message_page")
+    public String sendMessagePage(String openId, ModelMap modelMap){
+        modelMap.addAttribute("openId",openId);
+        return "wechat/sendMessagePage";
+    }
+
+    @RequestMapping("send_message")
+    @ResponseBody
+    public ServerResponse sendMessage(String openId,String content){
+        WxMpKefuMessage wxMpKefuMessage = WxMpKefuMessage.TEXT().toUser(openId).content(content).build();
+
+        try {
+            wxMpService.getKefuService().sendKefuMessage(wxMpKefuMessage);
+        } catch (WxErrorException e) {
+            e.printStackTrace();
+        }
+        return ServerResponse.createBySuccess();
     }
 }

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/header::headerFragment(用户管理)">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <button class="btn btn-default" onclick="reload()">重置</button>
+                <button class="btn btn-info" onclick="add()">添加</button>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="myTable" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" name="keeperUserGroup-checkable" class="group-checkable"/>
+                                <span></span>
+                            </label>
+                        </th>
+                        <th>序号</th>
+                        <th>openId</th>
+                        <th>昵称</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    var table;
+    $(function () {
+          table = $('#myTable').DataTable({
+            ajax:{
+                url:'/wechat/page_data',
+                dataSrc:''
+            },
+            lengthMenu: [ //自定义分页长度
+                [10, 20, 50],
+                ['10 页', '20 页', '50页']
+            ],
+            columns: [
+                {
+                    className: "td-checkbox",
+                    orderable: false,
+                    bSortable: false,
+                    data: "id",
+                    width: '30px',
+                    render: function (data, type, row, meta) {
+                        var content = '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">';
+                        content += '	<input type="checkbox" class="group-checkable" value="' + data + '" />';
+                        content += '	<span></span>';
+                        content += '</label>';
+                        return content;
+                    }
+                },
+                {
+                    data: null,
+                    bSortable: false,
+                    className: "text-right",
+                    width: "50px",
+                    render: function (data, type, row, meta) {
+                        // 显示行号
+                        var startIndex = meta.settings._iDisplayStart;
+                        return startIndex + meta.row + 1;
+                    }
+                },
+                {data: 'openId'},
+                {data: 'nickName'},
+
+                {
+                    data: "null",
+                    bSortable: false,
+                    render: function (data, type, row,meta) {
+                        var html = '<button class="btn btn-xs jfedit btn-danger"  id="saveBtn"  onclick="sendMessage(\''+row.openId+'\')" >发送消息</button>'
+                           
+                        return html;
+                    }
+                }
+            ],
+
+        });
+    })
+
+    function sendMessage(openId) {
+        layer.open({
+            type: 2,
+            offset: '50px',
+            area: ['700px', '650px'],
+            maxmin: true,
+            content: ' /wechat/send_message_page?openId='+$.trim(openId),
+        });
+    }
+
+    function reload() {
+        table.ajax.reload();
+    }
+</script>
+</body>
+</html>

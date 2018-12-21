@@ -9,5 +9,5 @@ import lombok.ToString;
 @ToString
 public class WeChatUser {
     private String openId;
-    private String name;
+    private String nickName;
 }

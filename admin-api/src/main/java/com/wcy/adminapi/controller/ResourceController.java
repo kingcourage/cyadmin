@@ -19,14 +19,14 @@ public class ResourceController {
     @Autowired
     private ResourceService resourceService;
 
-    @RequestMapping("/index")
+    @RequestMapping("index")
     public String index(){
         return "admin/resource";
     }
 
 
     @ResponseBody
-    @RequestMapping("/tree_data")
+    @RequestMapping("tree_data")
     public List treeData(@RequestParam(defaultValue = "0") Long parentId){
        List<Resource> resourceList =  resourceService.getResourceByParentId(parentId);
        List<ZTreeModel> zTreeModelList = resourceList.stream().map(item->new ZTreeModel(item)).collect(Collectors.toList());

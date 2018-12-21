@@ -34,4 +34,11 @@ public interface ResourceService {
      * @return
      */
     List<Resource> getResourceByParentId(Long parentId);
+
+    /**
+     *
+     * @param type
+     * @return
+     */
+    List<Resource> getResourceByType(Integer type);
 }

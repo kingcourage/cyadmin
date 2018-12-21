@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html>
+
+<head th:replace="common/header::headerFragment(发送消息)">
+<title>Title</title>
+</head>
+<body>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title"></h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form id="addForm">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="content">openId</label>
+                <input type="text" readonly="readonly" class="form-control" th:value="${openId}" name="openId" id="openId" placeholder="openId"></input>
+            </div>
+            <div class="form-group">
+                <label for="content">内容</label>
+                <textarea type="text" class="form-control" name="content" id="content" placeholder="内容"></textarea>
+            </div>
+        </div>
+        <div class="box-footer center-block">
+            <button type="button" onclick="save()" class="btn btn-primary">确定</button>
+            <button type="button" onclick="cancel()" class="btn btn-warning">取消</button>
+        </div>
+    </form>
+</div>
+<script>
+    function save() {
+        $.ajax({
+            type: "post",
+            url: "/wechat/send_message",
+            data: $("#addForm").serialize(),
+            dataType: "json",
+            success: function (result) {
+                if (result.status == "0") {
+                    //当你在iframe页面关闭自身时
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                    parent.reload();
+                } else {
+                    alert(result.msg);
+                }
+            }
+        })
+    }
+
+    function cancel() {
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index); //再执行关闭
+    }
+
+</script>
+</body>
+</html>

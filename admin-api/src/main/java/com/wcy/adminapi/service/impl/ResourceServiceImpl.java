@@ -54,4 +54,9 @@ public class ResourceServiceImpl implements ResourceService {
     public List<Resource> getResourceByParentId(Long parentId) {
         return resourceDao.getResourcesByParentIdEquals(parentId);
     }
+
+    @Override
+    public List<Resource> getResourceByType(Integer type) {
+        return resourceDao.getResourcesByTypeEquals(type);
+    }
 }
